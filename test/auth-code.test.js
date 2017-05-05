@@ -34,7 +34,9 @@ describe('getAuthCode', () => {
 
   it('returns existing auth code', (done) => {
     const user = { authCode: '122'};
-    const getAuthCode = proxy('../auth-code', { opener: () => {}});
+    const getAuthCode = proxy('../auth-code', {
+      opener: () => { throw new Error('opener should not be called'); }
+    });
     getAuthCode({}, user, (error, authCode) => {
       expect(error).to.be.null;
       expect(authCode).to.equal(user.authCode);

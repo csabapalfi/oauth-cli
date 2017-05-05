@@ -18,7 +18,7 @@ module.exports = ({ urls, client }, user, callback) => {
     server.close();
   });
   const { hostname, port } = url.parse(redirectUrl);
-  server.listen(port, hostname);
-
-  open(`${baseUrl}${url.format(approvePath({ clientId, redirectUrl }))}`);
+  server.listen(port, hostname, () => {
+    open(`${baseUrl}${url.format(approvePath({ clientId, redirectUrl }))}`);
+  });
 };
