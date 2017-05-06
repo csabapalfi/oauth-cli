@@ -1,6 +1,6 @@
 {
   "name": "local-oauth",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Play around with OAuth2 APIs locally",
   "license": "MIT",
   "scripts": {
