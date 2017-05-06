@@ -8,26 +8,36 @@ const { assign } = Object;
 module.exports = (options, user) =>
   new Promise((resolve, reject) => {
     const { authCode: existingAuthCode } = user;
-    if (existingAuthCode) return resolve(existingAuthCode);
+    if (existingAuthCode) {
+      debug(`existing: ${existingAuthCode}`);
+      return resolve(existingAuthCode)
+    };
 
-    debug('Reqesting authorisation code...');
-
-    const { endpoint, redirectUrl: redirect_uri } = options.authCode;
+    debug('requesting...');
+    const { endpoint, redirectUrl: redirect_uri, scopes } = options.authCode;
     const { id: client_id } = options.client;
 
     const server = createServer((request, response) => {
       const { query: { code: authCode } } = url.parse(request.url, true);
       response.end('Back to your terminal...');
-      debug(`Got authorisation code: ${authCode}`);
+      debug(`new: ${authCode}`);
       resolve(authCode);
       server.destroy();
     });
 
     const { hostname, port } = url.parse(redirect_uri);
     server.listen(port, hostname, () => {
-      open(endpoint + url.format({
-        query: { response_type: 'code', client_id, redirect_uri }
-      }));
+      debug(`redirect server listening on ${redirect_uri}...`);
+      const query = {
+        response_type: 'code',
+        access_type: 'offline',
+        client_id,
+        redirect_uri
+      };
+      if (scopes) query.scope = scopes.join(' ');
+      const approveUrl = endpoint + url.format({ query });
+      debug(`opening: ${approveUrl}...`);
+      open(approveUrl);
     });
     makeDestroyable(server);
   });

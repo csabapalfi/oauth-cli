@@ -7,7 +7,7 @@ const options = {
   },
   accessToken: {
     endpoint: 'https://api.freeagent.com/v2/token_endpoint',
-    clientAuth: 'basic', // or form
+    clientAuth: 'basic',
   },
   client: {
     id: process.env.FREEAGENT_CLIENT_ID,

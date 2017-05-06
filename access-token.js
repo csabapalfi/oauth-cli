@@ -4,14 +4,13 @@ const debug = require('debug')('oauth:access-token');
 
 module.exports = (options, user, callback) => {
   const { accessToken: existingAccessToken, expiry} = user;
-  if (existingAccessToken && Date.now() < expiry) {
+  if (existingAccessToken && Date.now() + 5000 < expiry) {
+    debug(`existing: ${existingAccessToken}`);
     return callback(null, { accessToken: existingAccessToken });
   }
 
   const { refreshToken: existingRefreshToken } = user;
-  debug(
-    `${existingRefreshToken ? 'Refreshing' : 'Creating'} access token...`
-  );
+  debug(`${existingRefreshToken ? 'refreshing' : 'requesting'}...`);
 
   const { id: clientId, secret: clientSecret } = options.client;
   const { endpoint, clientAuth } = options.accessToken;
@@ -34,18 +33,20 @@ module.exports = (options, user, callback) => {
     requestOptions.auth = { user: clientId, pass: clientSecret };
   }
 
+  debug(`request - url: ${requestOptions.url}`);
   request(requestOptions, (error, response, body) => {
-      if(error) {
-        return callback(error);
-      }
-      if(response.statusCode >= 400) {
-        return callback(body);
-      }
-      const {
-        access_token: accessToken,
-        expires_in: expiresIn,
-        refresh_token: refreshToken = existingRefreshToken
-      } = body;
+    if(error) {
+      return callback(error);
+    }
+    if(response.statusCode >= 400) {
+      return callback(body);
+    }
+    const {
+      access_token: accessToken,
+      expires_in: expiresIn,
+      refresh_token: refreshToken = existingRefreshToken
+    } = body;
+    debug(`new: ${accessToken}`);
     callback(null, {
       accessToken,
       refreshToken,

@@ -27,5 +27,5 @@ A bit like the [Google OAuth 2.0 Playground](https://developers.google.com/oauth
 
 * [Monzo](examples/monzo.js)
 * [FreeAgent](examples/freeagent.js)
-* Google Sheets (coming soon...)
+* [Google](examples/google.js)
 * TransferWise (coming soon...)

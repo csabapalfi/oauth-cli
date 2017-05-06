@@ -8,6 +8,7 @@ describe('getAuthCode', () => {
       opener: (toOpen) => {
           expect(toOpen).to.equal(
             `${endpoint}?response_type=code` +
+            '&access_type=offline' +
             '&client_id=someOauthClientId' +
             '&redirect_uri=http%3A%2F%2Flocalhost%3A9090'
           );
