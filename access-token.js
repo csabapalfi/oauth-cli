@@ -12,7 +12,7 @@ module.exports = (options, user, callback) => {
   const { refreshToken: existingRefreshToken } = user;
   debug(`${existingRefreshToken ? 'refreshing' : 'requesting'}...`);
 
-  const { id: clientId, secret: clientSecret } = options.client;
+  const { id: client_id, secret: client_secret } = options.client;
   const { endpoint, clientAuth } = options.accessToken;
   const { authCode } = user;
   const { redirectUrl: redirect_uri } = options.authCode;
@@ -26,11 +26,17 @@ module.exports = (options, user, callback) => {
       { grant_type: 'authorization_code', code: authCode, redirect_uri },
   };
 
-  if (clientAuth === 'form') {
-    requestOptions.form.client_id = clientId;
-    requestOptions.form.client_secret = clientSecret;
-  } else {
-    requestOptions.auth = { user: clientId, pass: clientSecret };
+  switch (clientAuth) {
+    case 'query':
+      requestOptions.qs = { client_id, client_secret };
+      break;
+    case 'form':
+      requestOptions.form.client_id = client_id;
+      requestOptions.form.client_secret = client_secret;
+      break;
+    case 'basic':
+    default:
+      requestOptions.auth = { user: client_id, pass: client_secret };
   }
 
   debug(`request - url: ${requestOptions.url}`);
