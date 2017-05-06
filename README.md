@@ -28,5 +28,5 @@ A bit like the [Google OAuth 2.0 Playground](https://developers.google.com/oauth
 * [Monzo](examples/monzo.js)
 * [FreeAgent](examples/freeagent.js)
 * [Google](examples/google.js)
-* [Facebook](examples/facebook.js)
+* [Facebook](examples/facebook.js) (no refresh tokens)
 * TransferWise (coming soon...)
