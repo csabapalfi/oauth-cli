@@ -7,12 +7,23 @@
     "test": "mocha --require ./test/setup.js"
   },
   "dependencies": {
+    "debug": "^2.6.6",
     "opener": "^1.4.3",
-    "request": "^2.81.0"
+    "request": "^2.81.0",
+    "server-destroy": "^1.0.1"
   },
   "devDependencies": {
     "chai": "^3.5.0",
     "mocha": "^3.3.0",
+    "nock": "^9.0.13",
+    "nyc": "^10.3.2",
     "proxyquire": "^1.7.11"
+  },
+  "nyc": {
+    "all": true,
+    "reporter": [
+      "html",
+      "text"
+    ]
   }
 }

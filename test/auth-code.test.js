@@ -1,46 +1,35 @@
-let lastOpened;
 const request = require('request');
 
 describe('getAuthCode', () => {
-  it('gets new auth codes', (done) => {
-    const baseUrl = 'https://api.example.com/v1';
+  it('gets new auth codes', () => {
+    const endpoint = 'https://api.example.com/v1/approve_app';
     const testAuthCode = '1234';
     const getAuthCode = proxy('../auth-code', {
       opener: (toOpen) => {
           expect(toOpen).to.equal(
-            `${baseUrl}/approve_app?response_type=code` +
-            '&redirectUrl=http%3A%2F%2Flocalhost%3A9090' +
-            '&clientId=someOauthClientId'
+            `${endpoint}?response_type=code` +
+            '&client_id=someOauthClientId' +
+            '&redirect_uri=http%3A%2F%2Flocalhost%3A9090'
           );
           request(`http://localhost:9090?code=${testAuthCode}`);
       },
     });
-    getAuthCode({
+    return getAuthCode({
       client: { id: 'someOauthClientId' },
-      urls: {
-        baseUrl,
-        redirectUrl: 'http://localhost:9090',
-        approvePath: ({ clientId, redirectUrl }) => ({
-          pathname: '/approve_app',
-          query: { response_type: 'code', redirectUrl, clientId }
-        })
-      }
-    }, {}, (error, authCode) => {
-      expect(error).to.be.null;
-      expect(authCode).to.equal(testAuthCode);
-      done();
-    });
+      authCode: { endpoint, redirectUrl: 'http://localhost:9090' },
+    }, {}).then(authCode =>
+      expect(authCode).to.equal(testAuthCode)
+    );
   });
 
-  it('returns existing auth code', (done) => {
+  it('returns existing auth code', () => {
     const user = { authCode: '122'};
     const getAuthCode = proxy('../auth-code', {
       opener: () => { throw new Error('opener should not be called'); }
     });
-    getAuthCode({}, user, (error, authCode) => {
-      expect(error).to.be.null;
-      expect(authCode).to.equal(user.authCode);
-      done();
-    });
+    return getAuthCode({ authCode: {}, client: {} }, user)
+      .then(authCode =>
+        expect(authCode).to.equal(user.authCode)
+      );
   });
 });
