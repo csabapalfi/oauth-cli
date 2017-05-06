@@ -2,7 +2,7 @@
 
 Play around with OAuth2 APIs locally.
 
-Kind of like [Google OAuth 2.0 Playground](https://developers.google.com/oauthplayground/) but as a node module that's easy to turn into a CLI or a basic server-side batch job.
+A bit like the [Google OAuth 2.0 Playground](https://developers.google.com/oauthplayground/) but as a node module.
 
 ## usage
 
