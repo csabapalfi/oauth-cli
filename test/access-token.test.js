@@ -58,7 +58,7 @@ describe('getAccessToken', () => {
     });
   });
 
-  it('returns non-expired access token', (done) => {
+  it('simply returns and existing non-expired access token', (done) => {
     const user = {
       accessToken: 'existingAccessToken',
       expiry: Date.now() + 60 * 60 * 1000,
@@ -93,5 +93,13 @@ describe('getAccessToken', () => {
       expect(result).to.be.undefined
       done();
     });
+  });
+
+  it.skip('sends client id and secret with Basic Auth', () => {
+    // TODO
+  });
+
+  it.skip('sends client id and secret in body', () => {
+    // TODO
   });
 });

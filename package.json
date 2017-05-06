@@ -21,6 +21,11 @@
   },
   "nyc": {
     "all": true,
+    "exclude": [
+      "examples",
+      "coverage",
+      "test"
+    ],
     "reporter": [
       "html",
       "text"
