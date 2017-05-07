@@ -4,6 +4,10 @@ Play around with OAuth2 APIs locally.
 
 A bit like the [Google OAuth 2.0 Playground](https://developers.google.com/oauthplayground/) but as a node module.
 
+## why?
+
+I use this to pre-auth locally then some of my personal scheduled scripts can use the credentials.
+
 ## usage
 
 ### register your app
@@ -30,7 +34,3 @@ A bit like the [Google OAuth 2.0 Playground](https://developers.google.com/oauth
 * [Google](examples/google.js)
 * [Facebook](examples/facebook.js) (no refresh tokens, needs manual re-auth)
 * TransferWise (coming soon...)
-
-## why?
-
-I use it to pre-auth locally then some of my personal scheduled scripts can use the credentials (and can also refresh tokens automatically if needed).
