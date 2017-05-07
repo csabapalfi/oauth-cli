@@ -1,8 +1,8 @@
 # local-oauth
 
-Play around with OAuth2 APIs locally.
+Pre-auth OAuth2 APIs locally
 
-A bit like the [Google OAuth 2.0 Playground](https://developers.google.com/oauthplayground/) but as a node module.
+...then request/refresh access tokens easily
 
 ## why?
 
