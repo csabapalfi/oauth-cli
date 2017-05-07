@@ -4,6 +4,10 @@ Pre-auth OAuth2 APIs locally
 
 ...then request/refresh access tokens easily
 
+## why
+
+I have some personal scripts (that run on a schedule) and need to interact with some OAuth2 APIs in a simple way for a single user.
+
 ## usage
 
 ### register your app
