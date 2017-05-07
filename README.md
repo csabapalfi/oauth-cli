@@ -6,7 +6,7 @@ Pre-auth OAuth2 APIs locally
 
 ## why?
 
-I have some personal scripts (that run on a schedule) and need to interact with some OAuth2 APIs in a simple way for a single user.
+I have some personal scripts that need to interact with OAuth2 APIs for a single user.
 
 ## usage
 
