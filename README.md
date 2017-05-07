@@ -4,10 +4,6 @@ Pre-auth OAuth2 APIs locally
 
 ...then request/refresh access tokens easily
 
-## why?
-
-I use this to pre-auth locally then some of my personal scheduled scripts can use the credentials.
-
 ## usage
 
 ### register your app
