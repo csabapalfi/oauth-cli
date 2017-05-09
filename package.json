@@ -1,7 +1,7 @@
 {
   "name": "local-oauth",
   "version": "0.2.0",
-  "description": "Play around with OAuth2 APIs locally",
+  "description": "RENAMED to oauth2-pre-auth",
   "license": "MIT",
   "scripts": {
     "test": "mocha --require ./test/setup.js"
