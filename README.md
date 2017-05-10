@@ -1,1 +1,1 @@
-# NO LONGER MAINTAINED
+# RENAMED to @csabapalfi/oauth
