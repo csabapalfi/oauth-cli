@@ -1,5 +1,5 @@
 {
-  "name": "oauth",
+  "name": "oauth-cli",
   "version": "0.1.0",
   "description": "Pre-auth OAuth2 APIs locally",
   "license": "MIT",
